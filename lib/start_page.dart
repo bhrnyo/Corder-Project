@@ -40,26 +40,26 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.grey,
-        body: Stack(children: [
-          Text('오직 어쩌고'),
-          Swiper(
-            pagination: SwiperPagination(),
-            itemCount: imageList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: ,
-                child: Image.asset(
-                  imageList[index],
-                  fit: BoxFit.cover,
-                ),
-              );
-            },
-          ),
-        ]),
-      ),
+    return Scaffold(
+      backgroundColor: Colors.grey,
+      body: Stack(children: [
+        Swiper(
+          pagination: SwiperPagination(),
+          itemCount: imageList.length,
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage(imageList[index]),
+                fit: BoxFit.cover,
+              )),
+            );
+          },
+        ),
+        Center(
+          child: Text('오직 개발자를 위한,', style: TextStyle(fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),),
+        )
+      ]),
     );
   }
 }

@@ -32,9 +32,6 @@ class MySwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Swiper with Text'),
-      ),
       body: Swiper(
         itemCount: images.length,
         itemBuilder: (BuildContext context, int index) {
@@ -58,7 +55,6 @@ class MySwiper extends StatelessWidget {
           );
         },
         pagination: SwiperPagination(),
-        control: SwiperControl(),
       ),
     );
   }
