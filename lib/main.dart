@@ -1,58 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
-  runApp(const MyApp());
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
+      title: 'Swiper with Text',
+      home: MySwiper(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final imageList = [
-    'assets/images/slide1.jpg',
-    'assets/images/slide2.jpg',
-    'assets/images/slide3.jpg',
-    'assets/images/slide4.png',
+class MySwiper extends StatelessWidget {
+  final List<String> images = [
+    'assets/slide1.jpg',
+    'assets/slide2.jpg',
+    'assets/slide3.jpg',
+    'assets/slide4.png',
   ];
+
+  final List<String> texts = [
+    'Text 1',
+    'Text 2',
+    'Text 3',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.grey,
-        body: Swiper(
-          pagination: SwiperPagination(),
-          itemCount: imageList.length,
-          itemBuilder: (context, index) {
-            return Image.asset(
-              imageList[index],
-              fit: BoxFit.cover,
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Swiper with Text'),
+      ),
+      body: Swiper(
+        itemCount: images.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(images[index]),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                texts[index],
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          );
+        },
+        pagination: SwiperPagination(),
+        control: SwiperControl(),
       ),
     );
   }
