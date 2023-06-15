@@ -62,9 +62,21 @@ flutter:
     - family: Black
       fonts:
         - asset: assets/fonts/NotoSansKR-Black.ttf
+    - family: Bold
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
     - family: Thin
       fonts:
         - asset: assets/fonts/NotoSansKR-Thin.ttf
+    - family: Light
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Light.ttf
+    - family: Medium
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Medium.ttf
+    - family: Regular
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
