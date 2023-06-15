@@ -30,7 +30,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   firebase_core: ^2.13.1
-  intro_slider: ^2.4.0
   flutter_swiper: ^1.1.6
   cloud_firestore: ^4.8.0
   flutter:
@@ -59,12 +58,13 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-
   fonts:
     - family: Black
       fonts:
-        - asset: fonts/NotoSansKR-Black.ttf
-        - asset: fonts/NotoSansKR-Thin.ttf
+        - asset: assets/fonts/NotoSansKR-Black.ttf
+    - family: Thin
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Thin.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -87,6 +87,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
 
   #   - family: Schyler
   #     fonts:

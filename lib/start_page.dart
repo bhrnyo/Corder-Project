@@ -57,8 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
         Center(
-          child: Text('오직 개발자를 위한,', style: TextStyle(fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),),
-        )
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+            Text(
+              '오직 개발자를 위한,',
+              style: TextStyle(
+                  fontSize: 30, color: Colors.white, fontFamily: 'Black'),
+            ),
+                Text(
+                  '오직 CORDER를 위한.',
+                  style: TextStyle(
+                      fontSize: 30, color: Colors.white, fontFamily: 'Black'),
+                ),
+          ],
+        ))
       ]),
     );
   }
