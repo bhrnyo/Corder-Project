@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:appproject/data_page.dart';
+
+import 'package:appproject/data_fin_page.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -101,8 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 70,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-
+                  onPressed: () async {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DataFinPage()));
                   },
                   child: Text(
                     '지금 바로 확인',
