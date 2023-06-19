@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appproject/data_page.dart';
 import 'package:appproject/data_fin_page.dart';
-
-class User {
-  String name;
-
-  User(this.name);
-}
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,9 +11,37 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String name = "";
   String? _errorMessage; // 에러 메시지를 저장할 변수
-  TextEditingController _textEditingController = TextEditingController();
+  late TextEditingController _textEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  void _setData(String value) async {
+    var key = 'name';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString(key, value); // await 추가
+  }
+
+  void _navigateToFirstDataPage() {
+    if (_errorMessage == null) {
+      String name = _textEditingController.text;
+      _setData(name);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FirstDataPage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +56,11 @@ class _LoginPageState extends State<LoginPage> {
               text: TextSpan(
                 text: '오직 개발자를 위한,\n',
                 style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.black,
-                    fontFamily: 'Black',
-                    height: 1),
+                  fontSize: 30,
+                  color: Colors.black,
+                  fontFamily: 'Black',
+                  height: 1,
+                ),
                 children: <TextSpan>[
                   TextSpan(
                     text: '오직 CORDER를 위한.',
@@ -48,26 +69,27 @@ class _LoginPageState extends State<LoginPage> {
                   TextSpan(
                     text: '\n\n당신에게 선사하는 ‘편한’ 코딩의 세계\n그 여정을 떠나기 위한 준비',
                     style: TextStyle(
-                        fontSize: 17, color: Colors.black, fontFamily: 'Thin'),
-                  )
+                      fontSize: 17,
+                      color: Colors.black,
+                      fontFamily: 'Thin',
+                    ),
+                  ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 150,
-            ),
+            SizedBox(height: 150),
             Container(
               width: 350,
               child: TextField(
                 controller: _textEditingController,
+                keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0), // 원하는 Border Radius 값 설정
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   labelText: '이름을 입력하세요',
                 ),
                 onChanged: (value) {
-                  final name = value;
                   bool isEmpty = value.trim().isEmpty;
                   setState(() {
                     if (isEmpty) {
@@ -78,12 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   });
                 },
                 onSubmitted: (value) {
-                  if (_errorMessage == null) {
-                    final person = User('$_textEditingController');
-                    DataFinPage(person: person,);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => FirstDataPage()));
-                  }
+                  _navigateToFirstDataPage(); // 변경된 내용
                 },
               ),
             ),
