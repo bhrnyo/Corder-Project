@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:appproject/login_page.dart';
 
 class DataFinPage extends StatefulWidget {
-  const DataFinPage({Key? key}) : super(key: key);
+  final User person;
+  const DataFinPage({required this.person});
 
   @override
   State<DataFinPage> createState() => _DataFinPageState();
 }
 
+String name = "";
+
 class _DataFinPageState extends State<DataFinPage> {
+
+  void printSharedValue(DataFinPage instance) {
+    name = '${instance.person}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +46,11 @@ class _DataFinPageState extends State<DataFinPage> {
               children: [
                 Image(image: AssetImage('assets/m1.PNG'), height: 230),
                 SizedBox(height: 20,),
-                Text('반갑습니다, 사용자1님 !', style: TextStyle(fontSize: 30, color: Colors.white, fontFamily: 'Black',),),
+                Text('네! 반갑습니다, $name님 !', style: TextStyle(fontSize: 30, color: Colors.white, fontFamily: 'Black',),),
               ],
             ),
           )
-        ])
+        ]),
       ]),
     );
   }

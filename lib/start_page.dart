@@ -1,3 +1,4 @@
+import 'package:appproject/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -106,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => DataFinPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                   child: Text(
                     '지금 바로 확인',
