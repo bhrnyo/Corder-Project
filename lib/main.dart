@@ -82,13 +82,13 @@ class _MainPageState extends State<MainPage> {
                               ),
                               ListTile(
                                 leading: Image.asset(
-                                  'assets/slide1.jpg',
+                                  'assets/be.jpg',
                                   width: 54,
                                   height: 58,
                                   fit: BoxFit.cover,
                                 ),
                                 title: Text(
-                                  '사용자1님을 위한\n도움되는 사이트',
+                                  '인기 회사',
                                   style: TextStyle(
                                       fontSize: 10, fontFamily: 'Medium', height: 1),
                                 ),
@@ -104,26 +104,26 @@ class _MainPageState extends State<MainPage> {
                             children: [
                               ListTile(
                                 leading: Image.asset(
-                                  'assets/slide1.jpg',
+                                  'assets/site.jpg',
                                   width: 54,
                                   height: 58,
                                   fit: BoxFit.cover,
                                 ),
                                 title: Text(
-                                  '코딩할 때 듣기 좋은 음악\n데일리 믹스',
+                                  '사용자1님을 위한\n도움되는 사이트',
                                   style: TextStyle(
                                       fontSize: 10, fontFamily: 'Medium', height: 1),
                                 ),
                               ),
                               ListTile(
                                 leading: Image.asset(
-                                  'assets/slide1.jpg',
+                                  'assets/C++.png',
                                   width: 54,
                                   height: 58,
                                   fit: BoxFit.cover,
                                 ),
                                 title: Text(
-                                  '인기 API',
+                                  '인기 프로그래밍 언어',
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontFamily: 'Medium',
