@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
                             children: [
                               ListTile(
                                 leading: Image.asset(
-                                  'assets/slide1.jpg',
+                                  'assets/smile.jpg',
                                   width: 54,
                                   height: 58,
                                   fit: BoxFit.cover,
@@ -66,7 +66,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               ListTile(
                                 leading: Image.asset(
-                                  'assets/slide1.jpg',
+                                  'assets/api.png',
                                   width: 54,
                                   height: 58,
                                   fit: BoxFit.cover,
