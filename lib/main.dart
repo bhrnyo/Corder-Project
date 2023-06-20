@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -34,37 +33,148 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
-            Text('인기 콘텐츠', style: TextStyle(fontSize: 24, fontFamily: 'Black'), textAlign: TextAlign.left,),
-            // Column(
-            //   children: [
-            //     ListView(
-            //       scrollDirection: Axis.vertical,
-            //       children: [
-            //         ListTile(
-            //           leading: Icon(Icons.home),
-            //           title: Text('Home'),
-            //           trailing: Icon(Icons.navigate_next),
-            //           onTap: () {},
-            //         ),
-            //         ListTile(
-            //           leading: Icon(Icons.event),
-            //           title: Text('Event'),
-            //           trailing: Icon(Icons.navigate_next),
-            //           onTap: () {},
-            //         ),
-            //         ListTile(
-            //           leading: Icon(Icons.camera),
-            //           title: Text('Camera'),
-            //           trailing: Icon(Icons.navigate_next),
-            //           onTap: () {},
-            //
-            //         )
-            //       ],
-            //     ),
-            //   ],
-            // ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '인기 콘텐츠',
+                  style: TextStyle(fontSize: 24, fontFamily: 'Black'),
+                  textAlign: TextAlign.left,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                          height: 200,
+                          child: ListView(
+                            scrollDirection: Axis.vertical,
+                            children: [
+                              ListTile(
+                                leading: Image.asset(
+                                  'assets/slide1.jpg',
+                                  width: 54,
+                                  height: 58,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  '코딩할 때 듣기 좋은 음악\n데일리 믹스',
+                                  style: TextStyle(
+                                      fontSize: 10, fontFamily: 'Medium', height: 1),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Image.asset(
+                                  'assets/slide1.jpg',
+                                  width: 54,
+                                  height: 58,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  '인기 API',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontFamily: 'Medium',
+                                    height: 1,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Image.asset(
+                                  'assets/slide1.jpg',
+                                  width: 54,
+                                  height: 58,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  '사용자1님을 위한\n도움되는 사이트',
+                                  style: TextStyle(
+                                      fontSize: 10, fontFamily: 'Medium', height: 1),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                    Expanded(
+                      child: Container(
+                          height: 200,
+                          child: ListView(
+                            scrollDirection: Axis.vertical,
+                            children: [
+                              ListTile(
+                                leading: Image.asset(
+                                  'assets/slide1.jpg',
+                                  width: 54,
+                                  height: 58,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  '코딩할 때 듣기 좋은 음악\n데일리 믹스',
+                                  style: TextStyle(
+                                      fontSize: 10, fontFamily: 'Medium', height: 1),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Image.asset(
+                                  'assets/slide1.jpg',
+                                  width: 54,
+                                  height: 58,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  '인기 API',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontFamily: 'Medium',
+                                    height: 1,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Image.asset(
+                                  'assets/slide1.jpg',
+                                  width: 54,
+                                  height: 58,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  '사용자1님을 위한\n도움되는 사이트',
+                                  style: TextStyle(
+                                      fontSize: 10, fontFamily: 'Medium', height: 1),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+                Text(
+                  '인기 콘텐츠',
+                  style: TextStyle(fontSize: 24, fontFamily: 'Black'),
+                  textAlign: TextAlign.left,
+                ),
+                Container(
+                    height: 400,
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        ListTile(
+                          leading: Image.asset('assets/slide1.png'),
+                          title: Text('코딩할 때 듣기 좋은 음악\n데일리 믹스'),
+                        ),
+                        ListTile(
+                          leading: Image.asset('assets/slide1.png'),
+                          title: Text('코딩할 때 듣기 좋은 음악\n데일리 믹스'),
+                        ),
+                        ListTile(
+                          leading: Image.asset('assets/slide1.png'),
+                          title: Text('코딩할 때 듣기 좋은 음악\n데일리 믹스'),
+                        ),
+                      ],
+                    )),
+              ],
+            )
           ],
         ),
       ),
