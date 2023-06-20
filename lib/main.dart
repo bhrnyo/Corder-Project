@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:appproject/main_like.dart';
+import 'package:appproject/main_news.dart';
+import 'package:appproject/main_user_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -9,172 +13,468 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   TextEditingController _textEditingController = TextEditingController();
+  late String name;
+
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  void _loadData() async {
+    var key = 'name';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    setState(() {
+      name = pref.getString(key) ?? ""; // null일 경우 빈 문자열로 초기화
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Center(
-              child: Container(
-                width: 340,
-                child: TextField(
-                  controller: _textEditingController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        body: TabBarView(children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Center(
+                  child: Container(
+                    width: 340,
+                    child: TextField(
+                      controller: _textEditingController,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        labelText: '검색어를 입력해 주세요',
+                      ),
                     ),
-                    labelText: '검색어를 입력해 주세요',
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '인기 콘텐츠',
-                  style: TextStyle(fontSize: 24, fontFamily: 'Black'),
-                  textAlign: TextAlign.left,
+                SizedBox(
+                  height: 10,
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Container(
-                          height: 200,
-                          child: ListView(
-                            scrollDirection: Axis.vertical,
-                            children: [
-                              ListTile(
-                                leading: Image.asset(
-                                  'assets/smile.jpg',
-                                  width: 54,
-                                  height: 58,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  '코딩할 때 듣기 좋은 음악\n데일리 믹스',
-                                  style: TextStyle(
-                                      fontSize: 10, fontFamily: 'Medium', height: 1),
-                                ),
-                              ),
-                              ListTile(
-                                leading: Image.asset(
-                                  'assets/api.png',
-                                  width: 54,
-                                  height: 58,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  '인기 API',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontFamily: 'Medium',
-                                    height: 1,
-                                  ),
-                                ),
-                              ),
-                              ListTile(
-                                leading: Image.asset(
-                                  'assets/be.jpg',
-                                  width: 54,
-                                  height: 58,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  '인기 회사',
-                                  style: TextStyle(
-                                      fontSize: 10, fontFamily: 'Medium', height: 1),
-                                ),
-                              ),
-                            ],
-                          )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        '데일리 콘텐츠',
+                        style: TextStyle(fontSize: 24, fontFamily: 'Black'),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
-                    Expanded(
-                      child: Container(
-                          height: 200,
-                          child: ListView(
-                            scrollDirection: Axis.vertical,
-                            children: [
-                              ListTile(
-                                leading: Image.asset(
-                                  'assets/site.jpg',
-                                  width: 54,
-                                  height: 58,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  '사용자1님을 위한\n도움되는 사이트',
-                                  style: TextStyle(
-                                      fontSize: 10, fontFamily: 'Medium', height: 1),
-                                ),
-                              ),
-                              ListTile(
-                                leading: Image.asset(
-                                  'assets/C++.png',
-                                  width: 54,
-                                  height: 58,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  '인기 프로그래밍 언어',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontFamily: 'Medium',
-                                    height: 1,
-                                  ),
-                                ),
-                              ),
-                              ListTile(
-                                leading: Image.asset(
-                                  'assets/slide1.jpg',
-                                  width: 54,
-                                  height: 58,
-                                  fit: BoxFit.cover,
-                                ),
-                                title: Text(
-                                  '사용자1님을 위한\n도움되는 사이트',
-                                  style: TextStyle(
-                                      fontSize: 10, fontFamily: 'Medium', height: 1),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-                Text(
-                  '인기 콘텐츠',
-                  style: TextStyle(fontSize: 24, fontFamily: 'Black'),
-                  textAlign: TextAlign.left,
-                ),
-                Container(
-                    height: 400,
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
+                    Row(
                       children: [
-                        ListTile(
-                          leading: Image.asset('assets/slide1.png'),
-                          title: Text('코딩할 때 듣기 좋은 음악\n데일리 믹스'),
+                        SizedBox(
+                          width: 10,
                         ),
-                        ListTile(
-                          leading: Image.asset('assets/slide1.png'),
-                          title: Text('코딩할 때 듣기 좋은 음악\n데일리 믹스'),
+                        Expanded(
+                          child: Container(
+                              height: 200,
+                              child: ListView(
+                                scrollDirection: Axis.vertical,
+                                children: [
+                                  ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/smile.jpg',
+                                        width: 54,
+                                        height: 58,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      '코딩할 때 듣기 좋은 음악\n데일리 믹스',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontFamily: 'Medium',
+                                          height: 1),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    tileColor: Color.fromRGBO(230, 230, 230, 1),
+                                    dense: true,
+                                    horizontalTitleGap: 10,
+                                    contentPadding: EdgeInsets.all(0),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/api.png',
+                                        width: 54,
+                                        height: 58,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      '인기 API',
+                                      style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: 'Medium',
+                                        height: 1,
+                                      ),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    tileColor: Color.fromRGBO(230, 230, 230, 1),
+                                    dense: true,
+                                    horizontalTitleGap: 10,
+                                    contentPadding: EdgeInsets.all(0),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/be.jpg',
+                                        width: 54,
+                                        height: 58,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      '인기 회사',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontFamily: 'Medium',
+                                          height: 1),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    tileColor: Color.fromRGBO(230, 230, 230, 1),
+                                    dense: true,
+                                    horizontalTitleGap: 10,
+                                    contentPadding: EdgeInsets.all(0),
+                                  ),
+                                ],
+                              )),
                         ),
-                        ListTile(
-                          leading: Image.asset('assets/slide1.png'),
-                          title: Text('코딩할 때 듣기 좋은 음악\n데일리 믹스'),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: Container(
+                              height: 200,
+                              child: ListView(
+                                scrollDirection: Axis.vertical,
+                                children: [
+                                  ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/site.jpg',
+                                        width: 54,
+                                        height: 58,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      '$name님을 위한\n도움되는 사이트',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontFamily: 'Medium',
+                                          height: 1),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    tileColor: Color.fromRGBO(230, 230, 230, 1),
+                                    dense: true,
+                                    horizontalTitleGap: 10,
+                                    contentPadding: EdgeInsets.all(0),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/C++.png',
+                                        width: 54,
+                                        height: 58,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      '인기 프로그래밍 언어',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontFamily: 'Medium',
+                                        height: 1,
+                                      ),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    tileColor: Color.fromRGBO(230, 230, 230, 1),
+                                    dense: true,
+                                    horizontalTitleGap: 10,
+                                    contentPadding: EdgeInsets.all(0),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/content.jpg',
+                                        width: 54,
+                                        height: 58,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      '좋아하는 콘텐츠',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontFamily: 'Medium',
+                                          height: 1),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    tileColor: Color.fromRGBO(230, 230, 230, 1),
+                                    dense: true,
+                                    horizontalTitleGap: 10,
+                                    contentPadding: EdgeInsets.all(0),
+                                  ),
+                                ],
+                              )),
+                        ),
+                        SizedBox(
+                          width: 10,
                         ),
                       ],
-                    )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        '인기 콘텐츠',
+                        style: TextStyle(fontSize: 24, fontFamily: 'Black'),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Container(
+                        height: 200,
+                        margin: EdgeInsets.symmetric(vertical: 20.0),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/html.png',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('HTML5,\n프로그래밍 언어?')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/api.png',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('인기 API')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/lang.png',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('인기 프로그래밍 언어')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/be.jpg',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('인기 회사')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                          ],
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        '$name님을 위한 콘텐츠',
+                        style: TextStyle(fontSize: 24, fontFamily: 'Black'),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Container(
+                        height: 200,
+                        margin: EdgeInsets.symmetric(vertical: 20.0),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/css.png',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('CSS3,\n강력한 기능들')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/aespa.jpg',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('인기 K-POP')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/m1.PNG',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('박하영에 대하여')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/content.jpg',
+                                    width: 140,
+                                    height: 140,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text('인기 회사')
+                                ],
+                              ),
+                              width: 160.0,
+                            ),
+                          ],
+                        )),
+                  ],
+                )
               ],
-            )
+            ),
+          ),
+          MainLikePage(),
+          MainNewsPage(),
+          MainUserPage(),
+        ]),
+        bottomNavigationBar: TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(Icons.home, color: Colors.black87, size: 23,),
+            ),
+            Tab(
+              icon: Icon(Icons.favorite, color: Colors.black87, size: 23),
+            ),
+            Tab(
+              icon: Icon(Icons.notifications, color: Colors.black87, size: 23),
+            ),
+            Tab(
+              icon: Icon(Icons.person, color: Colors.black87, size: 23),
+            ),
           ],
         ),
       ),

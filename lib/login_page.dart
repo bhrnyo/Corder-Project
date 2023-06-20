@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appproject/data_page.dart';
+import 'package:appproject/main.dart';
 import 'package:appproject/data_fin_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,6 +40,17 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FirstDataPage()),
+      );
+    }
+  }
+
+  void _navigateToMainPage() {
+    if (_errorMessage == null) {
+      String name = _textEditingController.text;
+      _setData(name);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MainPage()),
       );
     }
   }
