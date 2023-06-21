@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:appproject/data_fin_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appproject/data_check_N_page.dart';
 
 class DataCheckPage extends StatefulWidget {
@@ -35,13 +36,27 @@ class _DataCheckPageState extends State<DataCheckPage> {
     );
   }
 
+
+  void _setData() async {
+    var key = 'language';
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString(key, languageValue);
+  }
+
+
   Widget _buildElevatedButton({
     required String text,
     required Color backgroundColor,
     required Widget page,
+    required bool pass,
   }) {
     return ElevatedButton(
-      onPressed: () => _navigateToPage(page),
+      onPressed: () {
+        if(pass == true) {
+          _setData();
+        }
+        _navigateToPage(page);
+      },
       child: Text(
         text,
         textAlign: TextAlign.center,
@@ -78,70 +93,76 @@ class _DataCheckPageState extends State<DataCheckPage> {
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(image: AssetImage('assets/m2.PNG'), height: 230),
-                SizedBox(height: 20),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: '그렇다면 지금부터,\n',
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: Colors.white,
-                      fontFamily: 'Black',
-                      height: 1,
+            Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(image: AssetImage('assets/m2.PNG'), height: 230, alignment: Alignment.center,),
+                  SizedBox(height: 20),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: '그렇다면 지금부터,\n',
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontFamily: 'Black',
+                        height: 1,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '$languageValue에 대한\n',
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Colors.white,
+                            fontFamily: 'Black',
+                          ),
+                        ),
+                        TextSpan(
+                          text: '콘텐츠를 자주 보여드릴게요!\n',
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Colors.white,
+                            fontFamily: 'Black',
+                          ),
+                        ),
+                        TextSpan(
+                          text: '괜찮나요?',
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Colors.white,
+                            fontFamily: 'Black',
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '$languageValue에 대한\n',
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                          fontFamily: 'Black',
-                        ),
-                      ),
-                      TextSpan(
-                        text: '콘텐츠를 자주 보여드릴게요!\n',
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                          fontFamily: 'Black',
-                        ),
-                      ),
-                      TextSpan(
-                        text: '괜찮나요?',
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                          fontFamily: 'Black',
-                        ),
-                      ),
-                    ],
                   ),
-                ),
-                SizedBox(height: 50),
-                _buildElevatedButton(
-                  text: '네, 괜찮아요.',
-                  backgroundColor: Color.fromRGBO(40, 74, 222, 1),
-                  page: DataFinPage(),
-                ),
-                SizedBox(height: 20),
-                _buildElevatedButton(
-                  text: '다시 고를래요.',
-                  backgroundColor: Color.fromRGBO(168, 168, 168, 0.6),
-                  page: DataCheckNPage(),
-                ),
-                SizedBox(height: 20),
-                _buildElevatedButton(
-                  text: '안 보여주셔도 돼요.',
-                  backgroundColor: Color.fromRGBO(168, 168, 168, 0.6),
-                  page: DataFinPage(),
-                ),
-                SizedBox(height: 80),
-              ],
+                  SizedBox(height: 50),
+                  _buildElevatedButton(
+                    text: '네, 괜찮아요.',
+                    backgroundColor: Color.fromRGBO(40, 74, 222, 1),
+                    page: DataFinPage(),
+                    pass : true,
+
+                  ),
+                  SizedBox(height: 20),
+                  _buildElevatedButton(
+                    text: '다시 고를래요.',
+                    backgroundColor: Color.fromRGBO(168, 168, 168, 0.6),
+                    page: DataCheckNPage(),
+                    pass : false,
+                  ),
+                  SizedBox(height: 20),
+                  _buildElevatedButton(
+                    text: '안 보여주셔도 돼요.',
+                    backgroundColor: Color.fromRGBO(168, 168, 168, 0.6),
+                    page: DataFinPage(),
+                    pass : true,
+                  ),
+                  SizedBox(height: 80),
+                ],
+              ),
             ),
           ],
         ),

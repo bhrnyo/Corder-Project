@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appproject/main_like.dart';
 import 'package:appproject/main_news.dart';
 import 'package:appproject/main_user_page.dart';
+import 'package:appproject/playlist_page.dart';
+import 'package:appproject/detail_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -39,19 +41,37 @@ class _MainPageState extends State<MainPage> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 30,
+                  height: 40,
                 ),
                 Center(
                   child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(15, 41, 107, 1).withOpacity(0.13),
+                          spreadRadius: 5,
+                          blurRadius: 20,
+                          offset: Offset(5, 8), // 그림자 위치 조정 (가로, 세로)
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(5),
+                      border: null,
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromRGBO(233, 237, 244, 1),
+                          Color.fromRGBO(255, 255, 255, 0.21)
+                        ], // 그라데이션 색상 리스트
+                        begin: Alignment.topLeft, // 그라데이션 시작 위치
+                        end: Alignment.bottomRight, // 그라데이션 끝 위치
+                      ),
+                    ),
                     width: 340,
                     child: TextField(
                       controller: _textEditingController,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                        border: InputBorder.none,
                         labelText: '검색어를 입력해 주세요',
                       ),
                     ),
@@ -83,6 +103,23 @@ class _MainPageState extends State<MainPage> {
                                 scrollDirection: Axis.vertical,
                                 children: [
                                   ListTile(
+                                    onTap: () async {
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          transitionDuration: Duration(milliseconds: 500), // 전환 시간 설정
+                                          pageBuilder: (context, animation, secondaryAnimation) {
+                                            return PlayListPage();
+                                          },
+                                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                            return FadeTransition(
+                                              opacity: animation,
+                                              child: child,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
                                     leading: ClipRRect(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(5),
@@ -298,22 +335,41 @@ class _MainPageState extends State<MainPage> {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
-                            Container(
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'assets/html.png',
-                                    width: 140,
-                                    height: 140,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text('HTML5,\n프로그래밍 언어?')
-                                ],
+                            InkWell(
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/html.png',
+                                      width: 140,
+                                      height: 140,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text('HTML5,\n프로그래밍 언어?')
+                                  ],
+                                ),
+                                width: 160.0,
                               ),
-                              width: 160.0,
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    transitionDuration: Duration(milliseconds: 500), // 전환 시간 설정
+                                    pageBuilder: (context, animation, secondaryAnimation) {
+                                      return DetailPage();
+                                    },
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      return FadeTransition(
+                                        opacity: animation,
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
                             ),
                             Container(
                               child: Column(

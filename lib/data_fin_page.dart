@@ -66,7 +66,7 @@ class _DataFinPageState extends State<DataFinPage> {
               children: [
                 Image(image: AssetImage('assets/m1.PNG'), height: 230),
                 SizedBox(height: 20,),
-                Text('네! 반갑습니다, $name님 !', style: TextStyle(fontSize: 30, color: Colors.white, fontFamily: 'Black',),),
+                Text('네! 반갑습니다,\n$name님 !', textAlign: TextAlign.center, style: TextStyle(fontSize: 30, color: Colors.white, fontFamily: 'Black',),),
               ],
             ),
           )

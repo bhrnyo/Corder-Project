@@ -44,17 +44,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _navigateToMainPage() {
-    if (_errorMessage == null) {
-      String name = _textEditingController.text;
-      _setData(name);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
